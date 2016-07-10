@@ -15,7 +15,7 @@ class SudokuGenerator(Board):
                 self._board[row][col] = random.randint(0, 8)
 
 
-t = Board()
-t._board[0] = [1,2,3,4,5,6,7,8,9]
+t = SudokuGenerator()
+t.generate_sudoku()
 t.print_board()
-print t.row_check(0)
+t.full_check()

@@ -84,32 +84,3 @@ class Board:
             return True
         else:
             return False
-
-    def test_function1(self):
-        """Function that tests if constructor works properly."""
-        tmp = 0
-        for i in range(9):
-            for j in range(9):
-                if self._board[i][j] == 0:
-                    tmp += 1
-        assert tmp == 81, 'Error in constructor. Number of fields with 0 does not' \
-                          ' equal to 81 (all fields).'
-
-# t = Board()
-# t._board = [[1,2,3, 4,6,5, 7,8,9],
-#             [4,5,6, 7,8,9, 0,0,8],
-#             [7,8,9, 1,2,3, 4,5,6],
-#
-#             [2,5,6, 1,6,7, 0,0,6],
-#             [3,0,0, 2,5,8, 0,0,2],
-#             [5,0,0, 3,4,9, 2,0,3],
-#
-#             [6,0,1, 0,0,8, 0,0,4],
-#             [8,0,0, 1,0,3, 0,0,5],
-#             [9,0,0, 8,0,0, 0,0,9]]
-#
-# t.print_board()
-# print t.row_check(0)
-# print t.col_check(0)
-# print t.squeres_check(2, 3)
-# t.full_check()
