@@ -45,12 +45,12 @@ class Board:
         else:
             return False
 
-    def squeres_check(self, part): #count from 1
-        """Function that checks if 3x3 square is correctly filled. Count from 1 to 9
-            I    II  III
-            IV   V   VI
-            VII VIII IX"""
-        sub_matrix = [self._board[i][0:3] for i in range(0,3)]
+    def squeres_check(self, x, y): #count from 1
+        """Function that checks if 3x3 square is correctly. X and Y are counted from 1 to 3.
+            11  12  13
+            21  22  23
+            31  32  33"""
+        sub_matrix = [self._board[i][x * 3 - 3: x * 3] for i in range(y * 3 - 3, y * 3)]
         print sub_matrix
 
     def test_function1(self):
@@ -64,10 +64,10 @@ class Board:
                           ' equal to 81 (all fields).'
 
 t = Board()
-t._board = [[2,9,3,4,6,5,7,8,1], [1,0,0,0,0,0,0,0,8], [3,0,0,0,0,0,0,0,7], [4,0,0,0,0,0,0,0,6],
-               [5,0,0,0,0,0,0,0,2], [9,0,0,0,0,0,0,0,3], [8,0,0,0,0,0,0,0,4], [7,0,0,0,0,0,0,0,5],
-               [6,0,0,0,0,0,0,0,9]]
+t._board = [[2,9,3,4,6,5,7,8,1], [1,0,0,0,2,0,0,0,8], [3,0,0,0,0,3,0,0,7], [4,0,0,0,5,0,0,0,6],
+               [5,0,0,4,0,3,0,0,2], [9,0,0,4,0,0,2,0,3], [8,0,1,0,0,8,0,0,4], [7,0,0,1,0,3,0,0,5],
+               [6,0,0,8,0,0,0,0,9]]
 t.print_board()
 print t.row_check(0)
 print t.col_check(8)
-t.squeres_check(1)
+t.squeres_check(1, 2)
