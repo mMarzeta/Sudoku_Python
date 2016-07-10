@@ -45,13 +45,45 @@ class Board:
         else:
             return False
 
-    def squeres_check(self, part): #count from 1
-        """Function that checks if 3x3 square is correctly filled. Count from 1 to 9
-            I    II  III
-            IV   V   VI
-            VII VIII IX"""
-        sub_matrix = [self._board[i][0:3] for i in range(0,3)]
-        print sub_matrix
+    def squeres_check(self, x, y): #count from 1
+        """Function that checks if 3x3 square is correctly. X and Y are counted from 1 to 3.
+            11  12  13
+            21  22  23
+            31  32  33"""
+        sub_matrix = [self._board[i][x * 3 - 3: x * 3] for i in range(y * 3 - 3, y * 3)]
+        tmp = sum(sub_matrix, [])   #tricky convert from[x1,x2,x3][y1,y2,y3][z1,z2,z3] to
+        it = 0                      #[x1,x2,x3,y1,y2,y3,z1,z2,z3]
+        for i in range(1,10):
+            if tmp.__contains__(i):
+                it += 1
+        if it == 9:
+            return True
+        else:
+            return False
+
+    def full_check(self):
+        """Function that does full check _board. Uses other *_check() functions"""
+        flag = 0    # flag++ for every *_check function that returns True
+
+        for i in range(0, 9):
+            if self.row_check(i):
+                print "row: ", i
+                flag += 1
+            if self.col_check(i):
+                print "col: ", i
+                flag += 1
+
+        for i in range (0, 3):
+            for j in range (0, 3):
+                if self.squeres_check(i, j):
+                    print "squere: ", i, j
+                    flag += 1
+
+        print "flag: ", flag
+        if flag == 27:
+            return True
+        else:
+            return False
 
     def test_function1(self):
         """Function that tests if constructor works properly."""
@@ -63,11 +95,21 @@ class Board:
         assert tmp == 81, 'Error in constructor. Number of fields with 0 does not' \
                           ' equal to 81 (all fields).'
 
-t = Board()
-t._board = [[2,9,3,4,6,5,7,8,1], [1,0,0,0,0,0,0,0,8], [3,0,0,0,0,0,0,0,7], [4,0,0,0,0,0,0,0,6],
-               [5,0,0,0,0,0,0,0,2], [9,0,0,0,0,0,0,0,3], [8,0,0,0,0,0,0,0,4], [7,0,0,0,0,0,0,0,5],
-               [6,0,0,0,0,0,0,0,9]]
-t.print_board()
-print t.row_check(0)
-print t.col_check(8)
-t.squeres_check(1)
+# t = Board()
+# t._board = [[1,2,3, 4,6,5, 7,8,9],
+#             [4,5,6, 7,8,9, 0,0,8],
+#             [7,8,9, 1,2,3, 4,5,6],
+#
+#             [2,5,6, 1,6,7, 0,0,6],
+#             [3,0,0, 2,5,8, 0,0,2],
+#             [5,0,0, 3,4,9, 2,0,3],
+#
+#             [6,0,1, 0,0,8, 0,0,4],
+#             [8,0,0, 1,0,3, 0,0,5],
+#             [9,0,0, 8,0,0, 0,0,9]]
+#
+# t.print_board()
+# print t.row_check(0)
+# print t.col_check(0)
+# print t.squeres_check(2, 3)
+# t.full_check()
