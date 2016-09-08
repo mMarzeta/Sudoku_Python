@@ -24,7 +24,8 @@ class Board:
                 return True
 
     def row_check(self, row): #remember that we count from 0
-        """Function that checks if "row" on _board is correctly filled"""
+        """Function that checks if "row" on _board is correctly filled.
+            Returns true if given row is correctly filled."""
         tmp, it = self._board[row], 0
         for i in range(1,10):
             if tmp.__contains__(i):
@@ -45,15 +46,13 @@ class Board:
         else:
             return False
 
-    def squeres_check(self, x, y): #count from 1
-        """Function that checks if 3x3 square is correctly. X and Y are counted from 1 to 3.
-            11  12  13
-            21  22  23
-            31  32  33"""
-        sub_matrix = [self._board[i][x * 3 - 3: x * 3] for i in range(y * 3 - 3, y * 3)]
-        tmp = sum(sub_matrix, [])   #tricky convert from[x1,x2,x3][y1,y2,y3][z1,z2,z3] to
-        it = 0                      #[x1,x2,x3,y1,y2,y3,z1,z2,z3]
-        for i in range(1,10):
+    def squeres_check(self, n):
+        """Function that checks if squere on _board is correctly filled."""
+        it, tmp = 0, []
+        for i in range((n / 3) * 3, (n / 3) * 3 + 3):
+            for j in range((n % 3) * 3, (n % 3) * 3 + 3):
+                tmp.append(self._board[i][j])
+        for i in range(1, 10):
             if tmp.__contains__(i):
                 it += 1
         if it == 9:
@@ -67,19 +66,12 @@ class Board:
 
         for i in range(0, 9):
             if self.row_check(i):
-                print "row: ", i
                 flag += 1
             if self.col_check(i):
-                print "col: ", i
+                flag += 1
+            if self.squeres_check(i):
                 flag += 1
 
-        for i in range (0, 3):
-            for j in range (0, 3):
-                if self.squeres_check(i, j):
-                    print "squere: ", i, j
-                    flag += 1
-
-        print "flag: ", flag
         if flag == 27:
             return True
         else:
